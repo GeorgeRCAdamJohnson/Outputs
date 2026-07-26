@@ -19,6 +19,8 @@ jobs:
   agent:
     name: Run Agent
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     outputs:
       status:      ${{ steps.agent.outputs.status }}
       timestamp:   ${{ steps.agent.outputs.timestamp }}
@@ -46,6 +48,7 @@ jobs:
   report:
     name: Report Results
     runs-on: ubuntu-latest
+    permissions: {}
     needs: agent
     if: always()
 
