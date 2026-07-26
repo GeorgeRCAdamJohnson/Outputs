@@ -42,7 +42,7 @@ export default function App() {
           deviceInfo={deviceInfo}
           connected={connected}
         />
-        <RemoteControl onCommand={handleCommand} connected={connected} />
+        <RemoteControl onCommand={handleCommand} connected={connected} deviceInfo={deviceInfo} />
       </main>
     </div>
   );
