@@ -1,56 +1,148 @@
-/* Existing styles */
+:root {
+  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  color-scheme: light dark;
+  color: rgba(255, 255, 255, 0.87);
+  background-color: #242424;
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  justify-content: center;
+  background-color: #1a1a1a;
+}
+
 .app {
-  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: #282c34;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
   padding: 20px;
+  color: white;
+  min-width: 300px;
+  max-width: 90vw;
 }
 
 .app-header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
   margin-bottom: 20px;
+  position: relative;
+}
+
+.app-header h1 {
+  margin: 0;
+  font-size: 1.8em;
+  color: #90caf9;
 }
 
 .command-flash {
-  display: inline-block;
-  animation: flash 0.3s ease-in-out;
+  position: absolute;
+  top: 50%;
+  right: 0;
+  transform: translateY(-50%);
+  background-color: #4caf50;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-size: 0.9em;
+  animation: fadeOut 0.5s forwards;
+  opacity: 0;
 }
 
-@keyframes flash {
-  0% { opacity: 1; }
-  50% { opacity: 0.3; }
-  100% { opacity: 1; }
+@keyframes fadeOut {
+  0% { opacity: 1; transform: translateY(-50%) translateX(0); }
+  100% { opacity: 0; transform: translateY(-50%) translateX(20px); }
 }
 
-/* Remote control styles */
-.remote-body {
+.app-main {
   width: 100%;
 }
 
-.device-panel {
+.platform-tabs {
+  display: flex;
+  justify-content: center;
   margin-bottom: 20px;
-  padding: 15px;
-  border: 1px solid #ccc;
+}
+
+.platform-tabs button {
+  background-color: #3f444e;
+  color: #e0e0e0;
+  border: none;
+  padding: 10px 20px;
+  margin: 0 5px;
   border-radius: 8px;
-  background-color: #f9f9f9;
+  cursor: pointer;
+  font-size: 1em;
+  transition: background-color 0.2s, transform 0.1s;
+}
+
+.platform-tabs button:hover {
+  background-color: #5a616e;
+}
+
+.platform-tabs button.active {
+  background-color: #90caf9;
+  color: #282c34;
+  font-weight: bold;
+}
+
+.device-panel {
+  background-color: #3f444e;
+  padding: 20px;
+  border-radius: 10px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.device-panel h2 {
+  margin-top: 0;
+  color: #e0e0e0;
+  font-size: 1.5em;
 }
 
 .device-info {
-  margin-top: 10px;
-  padding: 10px;
-  background-color: #e9f7ef;
-  border-radius: 4px;
+  background-color: #5a616e;
+  padding: 15px;
+  border-radius: 8px;
+  margin-bottom: 15px;
+  text-align: left;
 }
 
 .device-status {
+  font-size: 0.9em;
   font-weight: bold;
+  margin-bottom: 5px;
+}
+
+.device-status.connected {
+  color: #8bc34a; /* Green */
 }
 
 .device-name {
   font-size: 1.2em;
-  margin: 5px 0;
+  font-weight: bold;
+  color: #e0e0e0;
 }
 
 .device-meta {
-  font-size: 0.9em;
-  color: #666;
+  font-size: 0.85em;
+  color: #bbbbbb;
 }
 
 .discovery-section {
@@ -64,63 +156,304 @@
   margin-bottom: 10px;
 }
 
+.discovery-label {
+  font-weight: bold;
+  color: #e0e0e0;
+}
+
 .scan-btn {
-  padding: 5px 10px;
-  background-color: #007bff;
-  color: white;
+  background-color: #61dafb;
+  color: #282c34;
   border: none;
-  border-radius: 4px;
+  padding: 8px 12px;
+  border-radius: 5px;
   cursor: pointer;
+  font-weight: bold;
+  transition: background-color 0.2s;
+}
+
+.scan-btn:hover:not(:disabled) {
+  background-color: #21a1f1;
 }
 
 .scan-btn:disabled {
-  background-color: #ccc;
+  background-color: #5a616e;
   cursor: not-allowed;
+  opacity: 0.7;
 }
 
 .device-list {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  max-height: 150px;
+  overflow-y: auto;
+  padding-right: 5px; /* for scrollbar */
 }
 
 .device-item {
-  padding: 10px;
+  background-color: #5a616e;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
   text-align: left;
-  background-color: #fff;
-  border: 1px solid #ddd;
-  border-radius: 4px;
   cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  display: block; /* Ensure it takes full width */
+  width: 100%;
+}
+
+.device-item:hover:not(:disabled) {
+  background-color: #727a86;
+  transform: translateY(-2px);
+}
+
+.device-item:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+.device-item:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.manual-connect {
+  margin-top: 20px;
+  border-top: 1px solid #5a616e;
+  padding-top: 15px;
+}
+
+.manual-connect form {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+
+.manual-connect input[type="text"] {
+  padding: 10px;
+  border: 1px solid #727a86;
+  border-radius: 6px;
+  background-color: #282c34;
+  color: white;
+  font-size: 1em;
+  flex-grow: 1;
+  min-width: 0;
+}
+
+.manual-connect input[type="text"]:focus {
+  outline: none;
+  border-color: #90caf9;
+  box-shadow: 0 0 0 2px rgba(144, 202, 249, 0.5);
+}
+
+.connect-btn {
+  background-color: #4caf50;
+  color: white;
+  border: none;
+  padding: 10px 15px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1em;
   transition: background-color 0.2s;
 }
 
-.device-item:hover {
-  background-color: #f0f0f0;
+.connect-btn:hover:not(:disabled) {
+  background-color: #66bb6a;
 }
 
-.manual-connect-form {
-  display: flex;
+.connect-btn:disabled {
+  background-color: #6c757d;
+  cursor: not-allowed;
+  opacity: 0.7;
+}
+
+.remote-control-panel {
+  background-color: #3f444e;
+  padding: 20px;
+  border-radius: 10px;
+  text-align: center;
+}
+
+.remote-control-panel h2 {
+  margin-top: 0;
+  color: #e0e0e0;
+  font-size: 1.5em;
+  margin-bottom: 20px;
+}
+
+.remote-body {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
   gap: 10px;
-  margin-top: 15px;
+  width: 100%; /* Changed from 280px to 100% */
+  margin: 0 auto;
 }
 
-.manual-connect-input {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-}
-
-.manual-connect-btn {
-  padding: 8px 15px;
-  background-color: #28a745;
+.remote-button {
+  background-color: #5a616e;
   color: white;
   border: none;
-  border-radius: 4px;
+  padding: 15px 10px;
+  border-radius: 8px;
+  font-size: 1em;
   cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 40px; /* Ensure consistent button height */
 }
 
-.manual-connect-btn:disabled {
-  background-color: #ccc;
-  cursor: not-allowed;
+.remote-button:hover {
+  background-color: #727a86;
+  transform: translateY(-2px);
 }
+
+.remote-button:active {
+  background-color: #4a5059;
+  transform: translateY(0);
+}
+
+.remote-button.large {
+  grid-column: span 3;
+  padding: 20px 10px;
+  font-size: 1.1em;
+  background-color: #61dafb;
+  color: #282c34;
+  font-weight: bold;
+}
+
+.remote-button.large:hover {
+  background-color: #21a1f1;
+}
+
+.remote-button.nav {
+  background-color: #3f51b5; /* Blue for navigation */
+}
+
+.remote-button.nav:hover {
+  background-color: #5c6bc0;
+}
+
+.remote-button.center {
+  background-color: #fbc02d; /* Yellow for select */
+  color: #282c34;
+}
+
+.remote-button.center:hover {
+  background-color: #ffeb3b;
+}
+
+.remote-button.back {
+  background-color: #f44336; /* Red for back */
+}
+
+.remote-button.back:hover {
+  background-color: #ef5350;
+}
+
+.remote-button.home {
+  background-color: #009688; /* Teal for home */
+}
+
+.remote-button.home:hover {
+  background-color: #26a69a;
+}
+
+.remote-button.play-pause {
+  background-color: #ff9800; /* Orange for play/pause */
+}
+
+.remote-button.play-pause:hover {
+  background-color: #ffa726;
+}
+
+.remote-button.volume-up,
+.remote-button.volume-down,
+.remote-button.mute {
+  background-color: #9c27b0; /* Purple for volume */
+}
+
+.remote-button.volume-up:hover,
+.remote-button.volume-down:hover,
+.remote-button.mute:hover {
+  background-color: #ab47bc;
+}
+
+/* Google TV Specific Styles */
+.google-tv-remote .remote-body {
+  grid-template-columns: repeat(3, 1fr); /* Default 3 columns */
+}
+
+.google-tv-remote .remote-button.row-span-2 {
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.google-tv-remote .remote-button.col-span-2 {
+  grid-column: span 2;
+}
+
+.google-tv-remote .remote-button.power {
+  background-color: #e91e63;
+}
+.google-tv-remote .remote-button.power:hover {
+  background-color: #ec407a;
+}
+.google-tv-remote .remote-button.google-assistant {
+  background-color: #4285f4;
+}
+.google-tv-remote .remote-button.google-assistant:hover {
+  background-color: #669df6;
+}
+.google-tv-remote .remote-button.youtube {
+  background-color: #ff0000;
+}
+.google-tv-remote .remote-button.youtube:hover {
+  background-color: #ff5252;
+}
+.google-tv-remote .remote-button.netflix {
+  background-color: #e50914;
+}
+.google-tv-remote .remote-button.netflix:hover {
+  background-color: #f44336;
+}
+
+/* General button styling */
+button {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #1a1a1a;
+  cursor: pointer;
+  transition: border-color 0.25s;
+}
+button:hover {
+  border-color: #646cff;
+}
+button:focus,
+button:focus-visible {
+  outline: 4px auto -webkit-focus-ring-color;
+}
+
+@media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+}
+
