@@ -326,3 +326,18 @@ body {
 }
 
 .shortcut-pill:active { filter: brightness(0.8); }
+
+
+/* Platform Tabs */
+.platform-tabs { display:flex; width:100%; background:#1A1A35; border-radius:12px; border:1px solid var(--remote-border); overflow:hidden; margin-bottom:12px; }
+.platform-tab { flex:1; padding:10px; border:none; background:transparent; color:var(--text-muted); font-family:Inter,system-ui,sans-serif; font-size:12px; font-weight:500; cursor:pointer; transition:all 0.15s; border-radius:10px; margin:3px; }
+.platform-tab:hover { background:#25253f; }
+.platform-tab.active { background:var(--accent); color:white; font-weight:600; }
+
+/* Google TV */
+.gtv-body { box-shadow:0 8px 40px #00000099, 0 0 60px #4285F420; border-color:#4466AA; }
+.gtv-ok { background:#4285F4 !important; box-shadow:0 2px 8px #4285F444 !important; }
+.gtv-play { background:#4285F4 !important; box-shadow:0 2px 10px #4285F444 !important; }
+.assistant-btn { width:44px; height:44px; border-radius:50%; background:linear-gradient(135deg,#4285F4,#EA4335 33%,#FBBC05 66%,#34A853); color:white; font-size:16px; font-weight:700; display:flex; align-items:center; justify-content:center; }
+.gtv-extras { display:flex; flex-direction:column; gap:6px; }
+.gtv-extra-btn { padding:6px 12px; background:var(--btn-surface); border-radius:8px; color:var(--text-muted); font-size:10px; font-weight:500; text-align:center; }
